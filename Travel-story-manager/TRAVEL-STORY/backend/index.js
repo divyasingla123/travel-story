@@ -1,8 +1,7 @@
 require("dotenv").config();
 const config = require("./config.json");
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-const express = require("express");
+const bcrypt = require("bcryptjs");const express = require("express");
 const cors = require("cors");
 
 const jwt = require("jsonwebtoken");
@@ -543,8 +542,7 @@ module.exports = app;
 // require("dotenv").config();
 // const fs = require("fs");
 // const path = require("path");
-// const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcryptjs");// const jwt = require("jsonwebtoken");
 // const express = require("express");
 // const cors = require("cors");
 // const upload = require("./multer");

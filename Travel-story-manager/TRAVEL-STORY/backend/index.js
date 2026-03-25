@@ -17,7 +17,12 @@ const DeletionRequest = require('./models/deletionRequest.model');
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "*" }));
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://travel-story-2akn.vercel.app"
+  ]
+}));
 
 app.use((err, req, res, next) => {
   console.error("Error:", err.message);
@@ -555,7 +560,12 @@ module.exports = app;
 
 // const app = express();
 // app.use(express.json());
-// app.use(cors({ origin: "*" }));
+// app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://travel-story-2akn.vercel.app"
+  ]
+}));
 
 // const usersFile = path.join(__dirname, "users.json");
 // const STORIES_FILE = "stories.json";

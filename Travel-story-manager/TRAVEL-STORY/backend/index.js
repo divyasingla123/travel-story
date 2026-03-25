@@ -38,7 +38,9 @@ app.use("/admin", adminRoutes);
 // app.get("/hello", async (req, res) => {
 //   return res.status(200).json({ message: "Hello World" });
 // });
-
+app.get("/", (req, res) => {
+  res.send("Travel Story API is running 🚀");
+});
 //*create account****************************
 app.post("/create-account",async(req,res)=>{
 const {fullName,email,password} = req.body;

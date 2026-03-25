@@ -11,7 +11,7 @@ const path = require("path");
 const {authenticateToken} = require("./utilities");
 const User=require("./models/user.model");
 const TravelStory= require("./models/travelStory.model");
-mongoose.connect(config.connectionString);
+mongoose.connect(process.env.MONGO_URI);
 const DeletionRequest = require('./models/deletionRequest.model');
 
 
@@ -282,7 +282,7 @@ app.get("/get-all-stories", authenticateToken ,async (req,res)=>{
 //       .json({error : true,message : "No image uploaded"});
 //     }
 
-//     const imageUrl = `http://localhost:8000/uploads/${req.file.filename}`;
+//     const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
 
 //     res.status(200).json({imageUrl});
 //   }
@@ -300,7 +300,7 @@ app.post("/image-upload", upload.single("image"), async (req, res) => {
         .json({ error: true, message: "No image uploaded" });
     }
 
-    const imageUrl = `http://localhost:8000/uploads/${req.file.filename}`;
+    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
     const fileSize = req.file.size; // Get the file size
 
     res.status(200).json({ imageUrl, fileSize }); // Return both URL and size
@@ -494,8 +494,11 @@ app.get("/travel-stories/filter",authenticateToken,async(req,res)=>{
 }
 });
 
-app.listen(8000);
-console.log("Server has started at 8000....");
+const PORT = process.env.PORT;
+
+app.listen(PORT, () => {
+  console.log(`Server has started at ${PORT}....`);
+});
 module.exports = app;
 
 
@@ -780,7 +783,7 @@ module.exports = app;
 // //* IMAGE UPLOAD ****************************
 // app.post("/image-upload", upload.single("image"), async (req, res) => {
 //   if (!req.file) return res.status(400).json({ error: true, message: "No image uploaded" });
-//   const imageUrl = `http://localhost:8000/uploads/${req.file.filename}`;
+//   const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
 //   res.status(201).json({ imageUrl });
 // });
 

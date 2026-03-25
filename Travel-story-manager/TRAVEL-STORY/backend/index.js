@@ -18,11 +18,11 @@ const DeletionRequest = require('./models/deletionRequest.model');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://travel-story-2akn.vercel.app"
-  ]
+  origin: "https://travel-story-2akn.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+app.options("*", cors());
 
 app.use((err, req, res, next) => {
   console.error("Error:", err.message);
